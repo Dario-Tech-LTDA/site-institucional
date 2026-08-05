@@ -6,12 +6,7 @@ export function Produtos() {
   return (
     <section id="produtos" className="border-b border-linha">
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
-        <div className="mb-4 flex items-baseline justify-between gap-6">
-          <p className="rotulo">Produtos</p>
-          <p className="rotulo">
-            {produtos.length.toString().padStart(2, "0")} no ar
-          </p>
-        </div>
+        <p className="rotulo mb-4">Produtos</p>
 
         <h2 className="mb-12 max-w-2xl font-display text-3xl font-semibold leading-tight tracking-tight text-texto sm:text-4xl">
           Nossos produtos

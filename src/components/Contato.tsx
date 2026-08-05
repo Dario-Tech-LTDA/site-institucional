@@ -10,8 +10,8 @@ export function Contato() {
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
         <p className="rotulo mb-8">Contato</p>
 
-        <h2 className="max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight text-texto sm:text-3xl">
-          Quem responde é um dos três.
+        <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight tracking-tight text-texto sm:text-4xl">
+          Vamos conversar?
         </h2>
         <p className="mt-5 max-w-xl leading-relaxed text-suave">
           Quer conhecer o Senhor Cardápio, tirar uma dúvida ou tem uma ideia para

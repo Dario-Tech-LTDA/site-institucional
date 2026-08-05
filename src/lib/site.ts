@@ -8,7 +8,7 @@ export const site = {
   razaoSocial: "DarioTech LTDA",
   tagline: "Tecnologia que facilita a vida de negócios e pessoas.",
   descricao:
-    "Somos uma empresa de tecnologia fundada por três primos. Construímos produtos que tiram o peso da operação do dia a dia de quem empreende.",
+    "Empresa de tecnologia brasileira. Construímos produtos que tiram o peso da operação do dia a dia de quem empreende.",
   email: "contato@senhorcardapio.com",
   telefone: "(11) 93311-2752",
   // E.164 sem símbolos, para o link do WhatsApp.
@@ -33,7 +33,7 @@ export const missao = {
     {
       titulo: "Perto de quem usa",
       texto:
-        "Empresa pequena tem uma vantagem: você fala com quem constrói. Suporte direto, sem fila e sem robô.",
+        "Você fala com quem constrói o produto. Suporte direto, sem fila de espera e sem robô no meio do caminho.",
     },
   ],
 } as const;
