@@ -45,31 +45,59 @@ Os componentes de cada seção ficam em `src/components/`:
 
 ## Identidade visual
 
-As cores vêm dos arquivos vetoriais da marca e estão declaradas em
-`src/app/globals.css`:
+A DarioTech tem identidade **própria**, deliberadamente oposta à do Senhor
+Cardápio. O produto é diurno e quente (creme, laranja, verde-petróleo, letras
+arredondadas); a empresa é noturna e fria. Essa separação por temperatura é o
+que impede que o institucional seja lido como "o site do produto".
+
+Tokens em `src/app/globals.css`:
 
 | Token Tailwind | Hex | Uso |
 | --- | --- | --- |
-| `petroleo` | `#344a48` | Cor principal, textos e fundos escuros |
-| `petroleo-escuro` | `#253634` | Seções escuras alternadas e rodapé |
-| `laranja` | `#d67229` | Destaques, botões e links |
-| `creme` | `#f5f0e3` | Fundo do site |
-| `creme-claro` | `#fbf8f0` | Cards sobre o fundo creme |
+| `noite` | `#0b0e15` | Fundo do site |
+| `grafite` | `#131826` | Cards e superfícies elevadas |
+| `traco` | `#232b3f` | Divisórias e bordas |
+| `gelo` | `#e9ecf5` | Texto principal |
+| `bruma` | `#8d96af` | Texto secundário e rótulos |
+| `indigo` | `#535bdd` | Botões, links e o destaque da assinatura |
+| `indigo-claro` | `#949af5` | Links sobre fundo escuro |
+| `creme` | `#f5f0e3` | Só a faixa da marca do produto |
 
-As logos ficam em `src/assets/brand/`. Elas são importadas como módulo (e não
-lidas de `public/`) para que o Next aplique o hash de cache e o `basePath`
-automaticamente.
+Todos os pares de texto passam em **WCAG AA** (4.5:1). O `indigo` foi escurecido
+de `#5b63e8` para `#535bdd` porque o tom original reprovava em 4.05:1 com o
+texto dos botões por cima.
 
-> **Nota:** hoje o site usa o símbolo do **Senhor Cardápio** como marca da
-> DarioTech. É provisório — quando a empresa tiver identidade própria, basta
-> trocar os arquivos em `src/assets/brand/`.
+**Tipografia:** Bricolage Grotesque nos títulos, Instrument Sans no texto
+corrido, IBM Plex Mono só nos rótulos de dado. Nenhuma é a geométrica
+arredondada da marca do produto.
+
+**Assinatura:** o nome da empresa saindo do nome do avô — `JORGE OR·DÁRIO·DUTRA`
+→ `DarioTech`, com o destaque se acendendo no carregamento (respeitando
+`prefers-reduced-motion`). O mesmo fio se repete em "Quem somos", onde o
+sobrenome **Dutra** aparece destacado nos três nomes.
+
+### Onde cada marca aparece
+
+As imagens ficam em `src/assets/brand/`, importadas como módulo (e não lidas de
+`public/`) para que o Next aplique hash de cache e `basePath` automaticamente.
+
+- **Topo e rodapé:** assinatura tipográfica "DarioTech". O mascote **não** entra
+  aqui — ele é o logo do Senhor Cardápio, e no cabeçalho seria lido como logo da
+  empresa.
+- **Produtos:** a marca completa do Senhor Cardápio, sobre faixa creme. É o
+  único lugar do site em que ela representa o produto, e não a empresa.
+- **História:** o mascote como **retrato** do vô Dario, com legenda. Cortado nas
+  bordas do desenho (`mascote.png`); o arquivo original tinha 76% de margem
+  transparente, o que o fazia parecer pequeno e solto na página.
+
+> **Pendência:** a DarioTech ainda não tem símbolo próprio — hoje a marca é só
+> tipográfica. Quando houver, ele entra no cabeçalho, no rodapé e no favicon
+> (`src/app/icon.png`, que hoje usa o mascote).
 >
-> Usamos a versão **RGB** e não a CMYK: JPEG em CMYK não tem transparência e os
-> navegadores renderizam suas cores de forma inconsistente. A arte é a mesma.
->
-> A versão "negativo" do símbolo não é usada: ela é uma silhueta chapada de uma
-> cor só (para impressão monocromática) e perde os traços do rosto. Nas seções
-> escuras usamos o símbolo positivo, cujo contorno creme já garante o contraste.
+> Dos arquivos da identidade, usamos a versão **RGB** e não a CMYK: JPEG em CMYK
+> não tem transparência e os navegadores renderizam suas cores de forma
+> inconsistente. A arte é a mesma. A versão "negativo" não serve para tela — é
+> uma silhueta chapada de uma cor só, para impressão monocromática.
 
 ## Deploy
 

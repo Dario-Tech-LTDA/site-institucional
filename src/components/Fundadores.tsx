@@ -1,37 +1,53 @@
 import { fundadores } from "@/lib/site";
 
+/**
+ * Destaca "Dutra" no nome. É o mesmo fio do avô: os três primos carregam o
+ * sobrenome que deu origem à empresa — o destaque mostra isso em vez de dizer.
+ */
+function NomeComSobrenome({ nome }: { nome: string }) {
+  const partes = nome.split(/(\bDutra\b)/);
+  return (
+    <>
+      {partes.map((parte, i) =>
+        parte === "Dutra" ? (
+          <span key={i} className="text-indigo-claro">
+            {parte}
+          </span>
+        ) : (
+          parte
+        ),
+      )}
+    </>
+  );
+}
+
 export function Fundadores() {
   return (
-    <section id="fundadores" className="py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-laranja">
-          Quem somos
-        </p>
-        <h2 className="max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight text-petroleo sm:text-4xl">
+    <section id="fundadores" className="border-b border-traco">
+      <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+        <p className="rotulo mb-8">Quem somos</p>
+
+        <h2 className="max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight text-gelo sm:text-3xl">
           Três primos, um sobrenome e a mesma teimosia.
         </h2>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-petroleo/75">
+        <p className="mt-5 max-w-xl leading-relaxed text-bruma">
           A gente não montou uma empresa para ter uma empresa. Montou porque via
           conhecidos perdendo dinheiro e paciência com ferramentas ruins — e
           sabia como resolver.
         </p>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 border-t border-traco">
           {fundadores.map((fundador) => (
             <li
               key={fundador.nome}
-              className="overflow-hidden rounded-2xl border border-petroleo/10 bg-creme-claro"
+              // No mobile o rótulo sempre desce; sem isso alguns nomes cabem
+              // na mesma linha e outros não, e a lista fica desalinhada.
+              className="flex flex-col gap-1 border-b border-traco py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
             >
-              {/* Accent bar instead of initials: two founders share "AD". */}
-              <div aria-hidden="true" className="h-1.5 bg-laranja" />
-              <div className="p-7">
-                <h3 className="font-display text-xl font-bold leading-snug text-petroleo">
-                  {fundador.nome}
-                </h3>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-wider text-laranja">
-                  {fundador.papel}
-                </p>
-              </div>
+              <span className="font-display text-xl font-semibold tracking-tight text-gelo sm:text-2xl">
+                <NomeComSobrenome nome={fundador.nome} />
+              </span>
+              <span className="rotulo">{fundador.papel}</span>
             </li>
           ))}
         </ul>

@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import simbolo from "@/assets/brand/simbolo-positivo.png";
 import { site } from "@/lib/site";
 
 const links = [
@@ -16,20 +14,13 @@ export function Header() {
   const [aberto, setAberto] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-petroleo/10 bg-creme/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
-        <a href="#topo" className="flex items-center gap-3">
-          <Image
-            src={simbolo}
-            alt=""
-            width={44}
-            height={47}
-            priority
-            className="h-11 w-auto"
-          />
-          <span className="font-display text-xl font-extrabold tracking-tight text-petroleo">
-            {site.nome}
-          </span>
+    <header className="sticky top-0 z-50 border-b border-traco bg-noite/85 backdrop-blur-md">
+      <div className="mx-auto flex h-20 max-w-5xl items-center justify-between px-6">
+        {/* Assinatura tipográfica, não o mascote: o símbolo é a marca do
+            produto e no topo do site seria lido como logo da empresa. */}
+        <a href="#topo" className="font-display text-xl tracking-tight">
+          <span className="font-bold text-gelo">Dario</span>
+          <span className="font-normal text-bruma">Tech</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -37,14 +28,14 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-petroleo/70 transition-colors hover:text-laranja"
+              className="text-sm text-bruma transition-colors hover:text-gelo"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contato"
-            className="rounded-full bg-petroleo px-5 py-2.5 text-sm font-semibold text-creme transition-colors hover:bg-laranja"
+            className="rounded-full bg-indigo px-5 py-2 text-sm font-medium text-gelo transition-colors hover:bg-indigo-claro hover:text-noite"
           >
             Falar com a gente
           </a>
@@ -56,40 +47,27 @@ export function Header() {
           aria-expanded={aberto}
           aria-controls="menu-mobile"
           aria-label={aberto ? "Fechar menu" : "Abrir menu"}
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-petroleo transition-colors hover:bg-petroleo/5 md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-gelo transition-colors hover:bg-grafite md:hidden"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             {aberto ? (
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
             ) : (
-              <path
-                d="M4 7h16M4 12h16M4 17h16"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
+              <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
             )}
           </svg>
         </button>
       </div>
 
       {aberto && (
-        <nav
-          id="menu-mobile"
-          className="border-t border-petroleo/10 bg-creme px-6 py-4 md:hidden"
-        >
-          <ul className="flex flex-col gap-1">
+        <nav id="menu-mobile" className="border-t border-traco bg-noite px-6 py-3 md:hidden">
+          <ul className="flex flex-col">
             {[...links, { href: "#contato", label: "Falar com a gente" }].map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className="border-b border-traco last:border-0">
                 <a
                   href={link.href}
                   onClick={() => setAberto(false)}
-                  className="block rounded-lg px-3 py-3 font-medium text-petroleo transition-colors hover:bg-petroleo/5"
+                  className="block py-3.5 text-gelo transition-colors hover:text-indigo-claro"
                 >
                   {link.label}
                 </a>
@@ -98,6 +76,8 @@ export function Header() {
           </ul>
         </nav>
       )}
+
+      <span className="sr-only">{site.nome}</span>
     </header>
   );
 }

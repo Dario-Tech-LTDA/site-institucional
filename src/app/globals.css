@@ -1,36 +1,123 @@
 @import "tailwindcss";
 
 /*
- * Brand palette lifted straight from the vector files in the visual identity
- * (Arte Final / RGB (Telas) / Vetor). Do not eyeball these — they are exact.
+ * Paleta da DarioTech — deliberadamente oposta à do Senhor Cardápio.
+ *
+ * O produto é diurno e quente (creme, laranja, verde-petróleo); a empresa é
+ * noturna e fria. A separação por temperatura é o que impede que o
+ * institucional seja lido como "site do produto". Nenhum valor aqui aparece
+ * na identidade do produto, com uma exceção proposital: o creme do mascote,
+ * usado só no retrato do vô Dario.
  */
 @theme {
-  --color-petroleo: #344a48;
-  --color-petroleo-claro: #46605d;
-  --color-petroleo-escuro: #253634;
-  --color-laranja: #d67229;
-  --color-laranja-claro: #e58d4b;
+  --color-noite: #0b0e15;
+  --color-grafite: #131826;
+  --color-traco: #232b3f;
+  --color-gelo: #e9ecf5;
+  --color-bruma: #8d96af;
+  /* Escurecido de #5b63e8 até passar 4.5:1 com o texto gelo por cima
+     (botões). O tom mais claro reprovava em 4.05:1. */
+  --color-indigo: #535bdd;
+  --color-indigo-claro: #949af5;
   --color-creme: #f5f0e3;
-  --color-creme-claro: #fbf8f0;
 
-  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 html {
   scroll-behavior: smooth;
-  /* Keep anchor targets clear of the sticky header. */
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
+  background-color: var(--color-noite);
 }
 
 body {
-  background-color: var(--color-creme);
-  color: var(--color-petroleo);
+  background-color: var(--color-noite);
+  color: var(--color-gelo);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Rótulo de dado: só para texto que realmente é dado (ano, local, contagem). */
+.rotulo {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-bruma);
+}
+
+/*
+ * Assinatura da página: o nome da empresa saindo do nome do avô.
+ * A sequência roda uma vez no carregamento — primeiro o nome inteiro,
+ * depois "DÁRIO" acende dentro de "ORDÁRIO", por fim a marca aparece.
+ */
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes acender {
+  from {
+    color: var(--color-bruma);
+    background-size: 0% 2px;
+  }
+  to {
+    color: var(--color-gelo);
+    background-size: 100% 2px;
+  }
+}
+
+.origem-nome {
+  animation: surgir 0.7s ease-out both;
+}
+
+/* Sublinhado que se preenche sob "DÁRIO" — um bloco sólido atrás do texto
+   seria lido como seleção do mouse, não como destaque. */
+.origem-destaque {
+  background-image: linear-gradient(var(--color-indigo), var(--color-indigo));
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 2px;
+  /* O fundo só pinta dentro da caixa; sem este respiro a linha fica colada
+     nas letras (ou é cortada, se posicionada abaixo da borda). */
+  padding-bottom: 0.28em;
+  animation: acender 0.6s ease-out 0.7s both;
+}
+
+.origem-marca {
+  animation: surgir 0.7s ease-out 1.2s both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+  .origem-nome,
+  .origem-destaque,
+  .origem-marca {
+    animation: none;
+  }
+  /* Sem movimento, o destaque precisa já nascer aceso. */
+  .origem-destaque {
+    background-size: 100% 2px;
+    color: var(--color-gelo);
+  }
+}
+
+::selection {
+  background-color: var(--color-indigo);
+  color: var(--color-gelo);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-indigo-claro);
+  outline-offset: 3px;
+  border-radius: 2px;
 }

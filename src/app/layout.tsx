@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 
-const inter = Inter({
+// Grotesca com desenho próprio para os títulos, uma sem-serifa neutra para
+// leitura corrida e uma monoespaçada só para rótulos de dado. Nenhuma delas é
+// a geométrica arredondada da marca do Senhor Cardápio.
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-bricolage",
   display: "swap",
 });
 
-const poppins = Poppins({
+const instrument = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-poppins",
+  variable: "--font-instrument",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -31,7 +40,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${poppins.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${bricolage.variable} ${instrument.variable} ${plexMono.variable}`}
+    >
       <body className="font-sans">{children}</body>
     </html>
   );
