@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/*
+ * Brand palette lifted straight from the vector files in the visual identity
+ * (Arte Final / RGB (Telas) / Vetor). Do not eyeball these — they are exact.
+ */
+@theme {
+  --color-petroleo: #344a48;
+  --color-petroleo-claro: #46605d;
+  --color-petroleo-escuro: #253634;
+  --color-laranja: #d67229;
+  --color-laranja-claro: #e58d4b;
+  --color-creme: #f5f0e3;
+  --color-creme-claro: #fbf8f0;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchor targets clear of the sticky header. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--color-creme);
+  color: var(--color-petroleo);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
