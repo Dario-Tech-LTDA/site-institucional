@@ -2,7 +2,7 @@
 
 Landing page institucional da DarioTech, publicada no GitHub Pages.
 
-**No ar:** https://dariotechltda.github.io/site-institucional/
+**No ar:** https://dariotech.com.br
 
 ## Stack
 
@@ -80,14 +80,24 @@ no GitHub Pages.
 **Configuração necessária no GitHub (uma vez só):** em
 *Settings → Pages → Build and deployment*, definir **Source: GitHub Actions**.
 
+### Domínio próprio
+
+O site é servido na raiz de `dariotech.com.br`. O domínio está declarado em
+`public/CNAME` — o Next copia `public/` para `out/`, então o arquivo entra no
+artefato a cada deploy. **Não apague esse arquivo:** sem ele o GitHub Pages
+esquece o domínio no próximo deploy e volta para `dariotechltda.github.io`.
+
+DNS no Registro.br, apontando a raiz para os quatro IPs do GitHub Pages:
+
+| Tipo | Nome | Valor |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
+| CNAME | `www` | `dariotechltda.github.io.` |
+
 ### Sobre o `basePath`
 
-O Pages serve este repositório em `/site-institucional/`, então o build precisa
-saber desse prefixo. O workflow passa `BASE_PATH=/site-institucional`; em
-desenvolvimento a variável fica vazia e tudo roda na raiz.
-
-Ao migrar para um domínio próprio (ex.: `dariotech.com.br`):
-
-1. Remover o `env: BASE_PATH` do workflow.
-2. Criar `public/CNAME` com o domínio.
-3. Apontar o DNS para o GitHub Pages e habilitar *Enforce HTTPS*.
+Com domínio próprio o site fica na raiz, então o build roda sem `BASE_PATH`.
+Ele só é necessário se o site voltar a ser publicado em
+`dariotechltda.github.io/site-institucional/` — nesse caso, reintroduza
+`env: BASE_PATH: /site-institucional` no passo de build do workflow.

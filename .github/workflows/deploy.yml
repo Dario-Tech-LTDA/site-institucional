@@ -30,11 +30,10 @@ jobs:
       - run: npm ci
 
       - name: Build estático
-        # O Pages serve o repo em /site-institucional, então o basePath precisa
-        # bater com o nome do repositório. Ao migrar para um domínio próprio,
-        # troque por BASE_PATH: "".
-        env:
-          BASE_PATH: /site-institucional
+        # Sem BASE_PATH: o site é servido na raiz de dariotech.com.br
+        # (o domínio próprio está em public/CNAME). Se um dia voltar a ser
+        # publicado em dariotechltda.github.io/site-institucional/, basta
+        # reintroduzir `env: BASE_PATH: /site-institucional` aqui.
         run: npm run build
 
       - uses: actions/configure-pages@v5
