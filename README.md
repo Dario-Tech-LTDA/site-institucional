@@ -93,10 +93,14 @@ DNS no Registro.br, apontando a raiz para os quatro IPs do GitHub Pages:
 | --- | --- | --- |
 | A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
 | AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
-| CNAME | `www` | `dariotechltda.github.io.` |
+| CNAME | `www` | `dario-tech-ltda.github.io.` |
 
 Os quatro registros A existem porque a raiz de um domínio não aceita CNAME —
 limitação do DNS, não do GitHub.
+
+O alvo do CNAME é `<dono-do-repo>.github.io`, ou seja, a organização
+**Dario-Tech-LTDA**. Se o repositório for movido de dono, esse registro precisa
+ser atualizado junto — os registros A da raiz, não: são fixos do GitHub Pages.
 
 O `www` não precisa de nada no código: com o apex configurado como domínio
 principal, o GitHub Pages cria automaticamente o redirect
