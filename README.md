@@ -45,41 +45,44 @@ Os componentes de cada seção ficam em `src/components/`:
 
 ## Identidade visual
 
-A DarioTech tem identidade **própria**, deliberadamente oposta à do Senhor
-Cardápio. O produto é diurno e quente (creme, laranja, verde-petróleo, letras
-arredondadas); a empresa é um campo de cor saturada, do topo ao rodapé. Essa
-separação é o que impede que o institucional seja lido como "o site do produto".
-
-Tokens em `src/app/globals.css`:
+Paleta **"Ardósia média + argila"**: azul dessaturado com texto marfim quente.
+A separação do Senhor Cardápio vem da temperatura — o produto é diurno e claro
+(creme, laranja, letras arredondadas), a empresa é escura e sóbria.
 
 | Token Tailwind | Hex | Uso |
 | --- | --- | --- |
-| `cobalto` | `#1b2cc1` | Fundo de todo o site |
-| `cobalto-fundo` | `#16249e` | Cards e superfícies |
-| `cobalto-linha` | `#4054e0` | Divisórias |
-| `branco` | `#ffffff` | Texto principal |
-| `azul-claro` | `#a9b4ff` | Texto secundário e rótulos |
-| `coral` | `#ff6b4a` | Fundo de botão e elementos gráficos |
-| `coral-claro` | `#ffa48e` | Links e destaques em texto |
-| `tinta` | `#0a1060` | Texto sobre o coral |
+| `base` | `#2a3b52` | Fundo do site |
+| `superficie` | `#33465f` | Cards |
+| `linha` | `#4a5d77` | Divisórias |
+| `texto` | `#f1ece4` | Texto principal |
+| `suave` | `#b6c1d0` | Texto secundário e rótulos |
+| `acento` | `#e0916f` | Fundo de botão e elementos gráficos |
+| `acento-texto` | `#efb097` | Texto e links em cor de acento |
+| `tinta` | `#22303f` | Texto sobre o acento |
 | `creme` | `#f5f0e3` | Só a faixa da marca do produto |
 
-Contraste auditado no DOM renderizado (69 elementos de texto): **todos passam em
-WCAG AA**, com mínimo de 4.9:1. Duas restrições que vieram dessa medição e não
-devem ser desfeitas:
+Contraste auditado no DOM renderizado (70 elementos de texto): **todos passam em
+WCAG AA**, mínimo 5.19:1. Três regras que vieram dessa medição:
 
-- O **coral cheio nunca é texto** — dá 3.42:1 sobre o cobalto. Ele só aparece
-  como fundo de botão (com texto `tinta`, 5.94:1) e em elementos gráficos.
-  Para texto, use `coral-claro` (5.03:1).
-- Botão coral leva texto `tinta`, não branco: branco sobre coral dá 2.82:1.
+- `acento` **nunca é texto** — sobre a superfície dá 3.87:1. Para texto em cor
+  de acento, use `acento-texto`.
+- Botão de acento leva texto `tinta`; texto claro por cima reprova.
+- Não clarear o fundo nem escurecer o `suave` sem medir de novo.
+
+### Paleta alternativa aprovada: "Navy profundo + latão"
+
+Mais escura e formal, mesma estrutura. Trocar os nove valores no `@theme` de
+`globals.css` (estão documentados em comentário lá) e regerar o favicon com a
+cor de fundo nova. Também passa em AA, com folga maior — 13.65:1 no texto
+principal contra 9.67:1 da Ardósia.
 
 **Tipografia:** Bricolage Grotesque nos títulos, Instrument Sans no texto
 corrido, IBM Plex Mono só nos rótulos de dado.
 
-**Assinatura:** o nome da empresa saindo do nome do avô — `JORGE OR·DÁRIO·DUTRA`
-→ `DarioTech`, com o destaque se acendendo no carregamento (respeitando
-`prefers-reduced-motion`). O mesmo fio se repete em "Quem somos", onde o
-sobrenome **Dutra** aparece destacado nos três nomes.
+**A origem do nome** aparece como nota discreta no hero — "DarioTech é o apelido
+do nosso avô, Jorge Or*dário* Dutra", com um traço fino sob as letras que viraram
+o nome. A história completa fica na seção História. O sobrenome **Dutra** também
+aparece destacado nos três fundadores.
 
 ### O mascote
 

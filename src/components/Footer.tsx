@@ -5,11 +5,11 @@ export function Footer() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-cobalto-linha">
+    <footer className="border-t border-linha">
       <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-display tracking-tight">
-          <span className="font-bold text-branco">Dario</span>
-          <span className="text-azul-claro">Tech</span>
+          <span className="font-bold text-texto">Dario</span>
+          <span className="text-suave">Tech</span>
         </p>
         <p className="rotulo">
           © {ano} {site.razaoSocial} · Em homenagem ao vô Dario

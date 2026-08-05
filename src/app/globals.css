@@ -1,31 +1,41 @@
 @import "tailwindcss";
 
 /*
- * Paleta da DarioTech — campo cobalto contínuo.
+ * Paleta da DarioTech — "Ardósia média + argila".
  *
- * Nada aqui vem da identidade do Senhor Cardápio, e é de propósito: o produto
- * é diurno e quente (creme, laranja, verde-petróleo), a empresa é um bloco de
- * cor saturada. A única exceção é o creme, usado só na faixa onde a marca do
- * produto aparece.
+ * Azul dessaturado com texto marfim quente. A separação do Senhor Cardápio
+ * vem da temperatura: o produto é diurno e claro (creme, laranja, letras
+ * arredondadas), a empresa é um azul escuro e sóbrio. O creme aparece só na
+ * faixa onde a marca do produto é exibida.
  *
- * Todos os pares de texto foram medidos e passam em WCAG AA (4.5:1):
- *   branco sobre cobalto ....... 9.65:1
- *   azul-claro sobre cobalto ... 4.90:1
- *   coral-claro sobre cobalto .. 5.03:1
- *   tinta sobre coral .......... 5.94:1
- * O coral cheio (#FF6B4A) dá só 3.42:1, então nunca é usado como texto —
- * apenas como fundo de botão (com texto tinta) e em elementos gráficos.
+ * Contraste medido no DOM renderizado — todos os pares passam em WCAG AA.
+ * Duas regras que vieram dessa medição e não devem ser desfeitas:
+ *   - botão de acento leva texto `tinta`; texto claro sobre o acento reprova;
+ *   - `acento` nunca é texto: sobre a superfície dá 3.87:1. Para texto em
+ *     cor de acento use `acento-texto`, que passa nos dois fundos;
+ *   - `suave` é o mínimo aceitável para texto secundário (6.25:1). Não
+ *     clarear o fundo nem escurecer esse tom sem medir de novo.
+ *
+ * ── Alternativa aprovada: "Navy profundo + latão" ──────────────────────
+ * Mais escura e formal, mesma estrutura. Para trocar, substitua os oito
+ * valores abaixo por estes (nada mais precisa mudar):
+ *     --color-base: #141F33;   --color-superficie: #1C2A42;
+ *     --color-linha: #2E3F58;  --color-texto: #EFE9DE;
+ *     --color-suave: #A9B3C2;  --color-acento: #D9A441;
+ *     --color-tinta: #141F33;  --color-creme: #F5F0E3;
+ * Também passa em AA, com folga maior (13.65:1 no texto principal).
+ * ───────────────────────────────────────────────────────────────────────
  */
 @theme {
-  --color-cobalto: #1b2cc1;
-  --color-cobalto-fundo: #16249e;
-  --color-cobalto-linha: #4054e0;
-  --color-branco: #ffffff;
-  --color-azul-claro: #a9b4ff;
-  --color-coral: #ff6b4a;
-  --color-coral-claro: #ffa48e;
-  --color-tinta: #0a1060;
-  --color-creme: #f5f0e3;
+  --color-base: #2A3B52;
+  --color-superficie: #33465F;
+  --color-linha: #4A5D77;
+  --color-texto: #F1ECE4;
+  --color-suave: #B6C1D0;
+  --color-acento: #E0916F;
+  --color-acento-texto: #EFB097;
+  --color-tinta: #22303F;
+  --color-creme: #F5F0E3;
 
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
@@ -35,93 +45,42 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
-  background-color: var(--color-cobalto);
+  background-color: var(--color-base);
 }
 
 body {
-  background-color: var(--color-cobalto);
-  color: var(--color-branco);
+  background-color: var(--color-base);
+  color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Rótulo de dado: só para texto que realmente é dado (contagem, local). */
 .rotulo {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-azul-claro);
+  color: var(--color-suave);
 }
 
-/*
- * Assinatura da página: o nome da empresa saindo do nome do avô.
- * Roda uma vez no carregamento — o nome inteiro surge, "DÁRIO" acende, a
- * marca aparece.
- */
-@keyframes surgir {
-  from {
-    opacity: 0;
-    transform: translateY(0.4rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes acender {
-  from {
-    color: var(--color-azul-claro);
-    background-size: 0% 3px;
-  }
-  to {
-    color: var(--color-branco);
-    background-size: 100% 3px;
-  }
-}
-
-.origem-nome {
-  animation: surgir 0.7s ease-out both;
-}
-
-/* Sublinhado que se preenche sob "DÁRIO" — um bloco sólido atrás do texto
-   seria lido como seleção do mouse, não como destaque. */
-.origem-destaque {
-  background-image: linear-gradient(var(--color-coral), var(--color-coral));
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 0% 3px;
-  padding-bottom: 0.28em;
-  animation: acender 0.6s ease-out 0.7s both;
-}
-
-.origem-marca {
-  animation: surgir 0.7s ease-out 1.2s both;
+/* Referência discreta à origem do nome: um traço fino sob "dário", sem
+   destaque de cor. Ela é uma nota, não a manchete. */
+.marca-dario {
+  color: var(--color-texto);
+  border-bottom: 1px solid var(--color-acento);
+  padding-bottom: 1px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .origem-nome,
-  .origem-destaque,
-  .origem-marca {
-    animation: none;
-  }
-  /* Sem movimento, o destaque precisa já nascer aceso. */
-  .origem-destaque {
-    background-size: 100% 3px;
-    color: var(--color-branco);
-  }
+  html { scroll-behavior: auto; }
 }
 
 ::selection {
-  background-color: var(--color-coral);
+  background-color: var(--color-acento);
   color: var(--color-tinta);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-coral-claro);
+  outline: 2px solid var(--color-acento);
   outline-offset: 3px;
   border-radius: 2px;
 }
