@@ -95,6 +95,14 @@ DNS no Registro.br, apontando a raiz para os quatro IPs do GitHub Pages:
 | AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
 | CNAME | `www` | `dariotechltda.github.io.` |
 
+Os quatro registros A existem porque a raiz de um domínio não aceita CNAME —
+limitação do DNS, não do GitHub.
+
+O `www` não precisa de nada no código: com o apex configurado como domínio
+principal, o GitHub Pages cria automaticamente o redirect
+`www.dariotech.com.br` → `dariotech.com.br`. Basta o registro CNAME acima
+existir; sem ele o www simplesmente não resolve.
+
 ### Sobre o `basePath`
 
 Com domínio próprio o site fica na raiz, então o build roda sem `BASE_PATH`.
