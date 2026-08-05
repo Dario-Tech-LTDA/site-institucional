@@ -56,6 +56,9 @@ export const fundadores = [
 export const produtos = [
   {
     nome: "Senhor Cardápio",
+    // Sem www: www.senhorcardapio.com não resolve, só o domínio raiz.
+    url: "https://senhorcardapio.com",
+    urlRotulo: "senhorcardapio.com",
     resumo: "Cardápio digital e pedidos online para bares, restaurantes e lanchonetes.",
     descricao:
       "O cliente abre o cardápio pelo QR Code na mesa ou pelo link no Instagram, monta o pedido e envia. O restaurante recebe tudo organizado, sem intermediário cobrando comissão por venda.",
