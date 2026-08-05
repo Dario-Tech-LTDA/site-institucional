@@ -14,13 +14,13 @@ export function Header() {
   const [aberto, setAberto] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-traco bg-noite/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-cobalto-linha bg-cobalto/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-5xl items-center justify-between px-6">
-        {/* Assinatura tipográfica, não o mascote: o símbolo é a marca do
-            produto e no topo do site seria lido como logo da empresa. */}
+        {/* Assinatura tipográfica. O mascote aparece uma vez só, no hero —
+            repeti-lo aqui gastaria o efeito e encheria a barra. */}
         <a href="#topo" className="font-display text-xl tracking-tight">
-          <span className="font-bold text-gelo">Dario</span>
-          <span className="font-normal text-bruma">Tech</span>
+          <span className="font-bold text-branco">Dario</span>
+          <span className="font-normal text-azul-claro">Tech</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -28,14 +28,15 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-bruma transition-colors hover:text-gelo"
+              className="text-sm text-azul-claro transition-colors hover:text-branco"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contato"
-            className="rounded-full bg-indigo px-5 py-2 text-sm font-medium text-gelo transition-colors hover:bg-indigo-claro hover:text-noite"
+            // Texto tinta, não branco: branco sobre coral dá 2.82:1 e reprova.
+            className="rounded-full bg-coral px-5 py-2 text-sm font-semibold text-tinta transition-colors hover:bg-coral-claro"
           >
             Falar com a gente
           </a>
@@ -47,7 +48,7 @@ export function Header() {
           aria-expanded={aberto}
           aria-controls="menu-mobile"
           aria-label={aberto ? "Fechar menu" : "Abrir menu"}
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-gelo transition-colors hover:bg-grafite md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-branco transition-colors hover:bg-cobalto-fundo md:hidden"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             {aberto ? (
@@ -60,14 +61,14 @@ export function Header() {
       </div>
 
       {aberto && (
-        <nav id="menu-mobile" className="border-t border-traco bg-noite px-6 py-3 md:hidden">
+        <nav id="menu-mobile" className="border-t border-cobalto-linha bg-cobalto px-6 py-3 md:hidden">
           <ul className="flex flex-col">
             {[...links, { href: "#contato", label: "Falar com a gente" }].map((link) => (
-              <li key={link.href} className="border-b border-traco last:border-0">
+              <li key={link.href} className="border-b border-cobalto-linha last:border-0">
                 <a
                   href={link.href}
                   onClick={() => setAberto(false)}
-                  className="block py-3.5 text-gelo transition-colors hover:text-indigo-claro"
+                  className="block py-3.5 text-branco transition-colors hover:text-coral-claro"
                 >
                   {link.label}
                 </a>

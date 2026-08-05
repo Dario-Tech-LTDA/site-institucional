@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
 /*
- * Paleta da DarioTech — deliberadamente oposta à do Senhor Cardápio.
+ * Paleta da DarioTech — campo cobalto contínuo.
  *
- * O produto é diurno e quente (creme, laranja, verde-petróleo); a empresa é
- * noturna e fria. A separação por temperatura é o que impede que o
- * institucional seja lido como "site do produto". Nenhum valor aqui aparece
- * na identidade do produto, com uma exceção proposital: o creme do mascote,
- * usado só no retrato do vô Dario.
+ * Nada aqui vem da identidade do Senhor Cardápio, e é de propósito: o produto
+ * é diurno e quente (creme, laranja, verde-petróleo), a empresa é um bloco de
+ * cor saturada. A única exceção é o creme, usado só na faixa onde a marca do
+ * produto aparece.
+ *
+ * Todos os pares de texto foram medidos e passam em WCAG AA (4.5:1):
+ *   branco sobre cobalto ....... 9.65:1
+ *   azul-claro sobre cobalto ... 4.90:1
+ *   coral-claro sobre cobalto .. 5.03:1
+ *   tinta sobre coral .......... 5.94:1
+ * O coral cheio (#FF6B4A) dá só 3.42:1, então nunca é usado como texto —
+ * apenas como fundo de botão (com texto tinta) e em elementos gráficos.
  */
 @theme {
-  --color-noite: #0b0e15;
-  --color-grafite: #131826;
-  --color-traco: #232b3f;
-  --color-gelo: #e9ecf5;
-  --color-bruma: #8d96af;
-  /* Escurecido de #5b63e8 até passar 4.5:1 com o texto gelo por cima
-     (botões). O tom mais claro reprovava em 4.05:1. */
-  --color-indigo: #535bdd;
-  --color-indigo-claro: #949af5;
+  --color-cobalto: #1b2cc1;
+  --color-cobalto-fundo: #16249e;
+  --color-cobalto-linha: #4054e0;
+  --color-branco: #ffffff;
+  --color-azul-claro: #a9b4ff;
+  --color-coral: #ff6b4a;
+  --color-coral-claro: #ffa48e;
+  --color-tinta: #0a1060;
   --color-creme: #f5f0e3;
 
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
@@ -29,28 +35,28 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
-  background-color: var(--color-noite);
+  background-color: var(--color-cobalto);
 }
 
 body {
-  background-color: var(--color-noite);
-  color: var(--color-gelo);
+  background-color: var(--color-cobalto);
+  color: var(--color-branco);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Rótulo de dado: só para texto que realmente é dado (ano, local, contagem). */
+/* Rótulo de dado: só para texto que realmente é dado (contagem, local). */
 .rotulo {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-bruma);
+  color: var(--color-azul-claro);
 }
 
 /*
  * Assinatura da página: o nome da empresa saindo do nome do avô.
- * A sequência roda uma vez no carregamento — primeiro o nome inteiro,
- * depois "DÁRIO" acende dentro de "ORDÁRIO", por fim a marca aparece.
+ * Roda uma vez no carregamento — o nome inteiro surge, "DÁRIO" acende, a
+ * marca aparece.
  */
 @keyframes surgir {
   from {
@@ -65,12 +71,12 @@ body {
 
 @keyframes acender {
   from {
-    color: var(--color-bruma);
-    background-size: 0% 2px;
+    color: var(--color-azul-claro);
+    background-size: 0% 3px;
   }
   to {
-    color: var(--color-gelo);
-    background-size: 100% 2px;
+    color: var(--color-branco);
+    background-size: 100% 3px;
   }
 }
 
@@ -81,12 +87,10 @@ body {
 /* Sublinhado que se preenche sob "DÁRIO" — um bloco sólido atrás do texto
    seria lido como seleção do mouse, não como destaque. */
 .origem-destaque {
-  background-image: linear-gradient(var(--color-indigo), var(--color-indigo));
+  background-image: linear-gradient(var(--color-coral), var(--color-coral));
   background-repeat: no-repeat;
   background-position: left bottom;
-  background-size: 0% 2px;
-  /* O fundo só pinta dentro da caixa; sem este respiro a linha fica colada
-     nas letras (ou é cortada, se posicionada abaixo da borda). */
+  background-size: 0% 3px;
   padding-bottom: 0.28em;
   animation: acender 0.6s ease-out 0.7s both;
 }
@@ -106,18 +110,18 @@ body {
   }
   /* Sem movimento, o destaque precisa já nascer aceso. */
   .origem-destaque {
-    background-size: 100% 2px;
-    color: var(--color-gelo);
+    background-size: 100% 3px;
+    color: var(--color-branco);
   }
 }
 
 ::selection {
-  background-color: var(--color-indigo);
-  color: var(--color-gelo);
+  background-color: var(--color-coral);
+  color: var(--color-tinta);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-indigo-claro);
+  outline: 2px solid var(--color-coral-claro);
   outline-offset: 3px;
   border-radius: 2px;
 }

@@ -10,27 +10,27 @@ export function Contato() {
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
         <p className="rotulo mb-8">Contato</p>
 
-        <h2 className="max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight text-gelo sm:text-3xl">
+        <h2 className="max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight text-branco sm:text-3xl">
           Quem responde é um dos três.
         </h2>
-        <p className="mt-5 max-w-xl leading-relaxed text-bruma">
+        <p className="mt-5 max-w-xl leading-relaxed text-azul-claro">
           Quer conhecer o Senhor Cardápio, tirar uma dúvida ou tem uma ideia para
           tirar do papel? Chama a gente.
         </p>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg bg-traco sm:grid-cols-2">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-lg bg-cobalto-linha sm:grid-cols-2">
           <a
             href={`https://wa.me/${site.whatsapp}?text=${mensagem}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-noite p-7 transition-colors hover:bg-grafite"
+            className="group bg-cobalto p-7 transition-colors hover:bg-cobalto-fundo"
           >
             <span className="rotulo">WhatsApp</span>
-            <span className="mt-3 flex items-center gap-2 font-display text-xl font-semibold text-gelo">
+            <span className="mt-3 flex items-center gap-2 font-display text-xl font-semibold text-branco">
               {site.telefone}
               <span
                 aria-hidden="true"
-                className="text-indigo-claro transition-transform group-hover:translate-x-1"
+                className="text-coral-claro transition-transform group-hover:translate-x-1"
               >
                 →
               </span>
@@ -39,16 +39,16 @@ export function Contato() {
 
           <a
             href={`mailto:${site.email}`}
-            className="group bg-noite p-7 transition-colors hover:bg-grafite"
+            className="group bg-cobalto p-7 transition-colors hover:bg-cobalto-fundo"
           >
             <span className="rotulo">E-mail</span>
             {/* text-base no mobile: em text-xl o endereço quebra no meio da
                 palavra e fica ilegível em telas de 390px. */}
-            <span className="mt-3 flex items-center gap-2 font-display text-base font-semibold text-gelo sm:text-xl">
+            <span className="mt-3 flex items-center gap-2 font-display text-base font-semibold text-branco sm:text-xl">
               {site.email}
               <span
                 aria-hidden="true"
-                className="text-indigo-claro transition-transform group-hover:translate-x-1"
+                className="text-coral-claro transition-transform group-hover:translate-x-1"
               >
                 →
               </span>

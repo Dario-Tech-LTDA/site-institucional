@@ -47,57 +47,72 @@ Os componentes de cada seção ficam em `src/components/`:
 
 A DarioTech tem identidade **própria**, deliberadamente oposta à do Senhor
 Cardápio. O produto é diurno e quente (creme, laranja, verde-petróleo, letras
-arredondadas); a empresa é noturna e fria. Essa separação por temperatura é o
-que impede que o institucional seja lido como "o site do produto".
+arredondadas); a empresa é um campo de cor saturada, do topo ao rodapé. Essa
+separação é o que impede que o institucional seja lido como "o site do produto".
 
 Tokens em `src/app/globals.css`:
 
 | Token Tailwind | Hex | Uso |
 | --- | --- | --- |
-| `noite` | `#0b0e15` | Fundo do site |
-| `grafite` | `#131826` | Cards e superfícies elevadas |
-| `traco` | `#232b3f` | Divisórias e bordas |
-| `gelo` | `#e9ecf5` | Texto principal |
-| `bruma` | `#8d96af` | Texto secundário e rótulos |
-| `indigo` | `#535bdd` | Botões, links e o destaque da assinatura |
-| `indigo-claro` | `#949af5` | Links sobre fundo escuro |
+| `cobalto` | `#1b2cc1` | Fundo de todo o site |
+| `cobalto-fundo` | `#16249e` | Cards e superfícies |
+| `cobalto-linha` | `#4054e0` | Divisórias |
+| `branco` | `#ffffff` | Texto principal |
+| `azul-claro` | `#a9b4ff` | Texto secundário e rótulos |
+| `coral` | `#ff6b4a` | Fundo de botão e elementos gráficos |
+| `coral-claro` | `#ffa48e` | Links e destaques em texto |
+| `tinta` | `#0a1060` | Texto sobre o coral |
 | `creme` | `#f5f0e3` | Só a faixa da marca do produto |
 
-Todos os pares de texto passam em **WCAG AA** (4.5:1). O `indigo` foi escurecido
-de `#5b63e8` para `#535bdd` porque o tom original reprovava em 4.05:1 com o
-texto dos botões por cima.
+Contraste auditado no DOM renderizado (69 elementos de texto): **todos passam em
+WCAG AA**, com mínimo de 4.9:1. Duas restrições que vieram dessa medição e não
+devem ser desfeitas:
+
+- O **coral cheio nunca é texto** — dá 3.42:1 sobre o cobalto. Ele só aparece
+  como fundo de botão (com texto `tinta`, 5.94:1) e em elementos gráficos.
+  Para texto, use `coral-claro` (5.03:1).
+- Botão coral leva texto `tinta`, não branco: branco sobre coral dá 2.82:1.
 
 **Tipografia:** Bricolage Grotesque nos títulos, Instrument Sans no texto
-corrido, IBM Plex Mono só nos rótulos de dado. Nenhuma é a geométrica
-arredondada da marca do produto.
+corrido, IBM Plex Mono só nos rótulos de dado.
 
 **Assinatura:** o nome da empresa saindo do nome do avô — `JORGE OR·DÁRIO·DUTRA`
 → `DarioTech`, com o destaque se acendendo no carregamento (respeitando
 `prefers-reduced-motion`). O mesmo fio se repete em "Quem somos", onde o
 sobrenome **Dutra** aparece destacado nos três nomes.
 
+### O mascote
+
+O desenho do vô Dario é usado **repintado na cor da empresa**: branco sobre o
+campo cobalto. Isso funciona porque a arte "negativo" do kit tem os traços do
+rosto como *recortes transparentes* — 49% da área do desenho é vazada, então é
+o próprio fundo do site que forma o rosto. Repintado, ele deixa de carregar a
+paleta do produto e passa a pertencer à empresa.
+
+As imagens são geradas por `scripts/recolorir-mascote.py`, não editadas à mão:
+
+```bash
+python3 scripts/recolorir-mascote.py --cor '#FFFFFF' --saida mascote-branco.png
+```
+
+Se a paleta mudar, rode de novo com outra cor. A arte de origem vem do kit da
+marca, que não é versionado — o script avisa se não encontrar.
+
 ### Onde cada marca aparece
 
-As imagens ficam em `src/assets/brand/`, importadas como módulo (e não lidas de
-`public/`) para que o Next aplique hash de cache e `basePath` automaticamente.
+Ativos em `src/assets/brand/`, importados como módulo (e não lidos de `public/`)
+para que o Next aplique hash de cache e `basePath` automaticamente.
 
-- **Topo e rodapé:** assinatura tipográfica "DarioTech". O mascote **não** entra
-  aqui — ele é o logo do Senhor Cardápio, e no cabeçalho seria lido como logo da
-  empresa.
-- **Produtos:** a marca completa do Senhor Cardápio, sobre faixa creme. É o
-  único lugar do site em que ela representa o produto, e não a empresa.
-- **História:** o mascote como **retrato** do vô Dario, com legenda. Cortado nas
-  bordas do desenho (`mascote.png`); o arquivo original tinha 76% de margem
-  transparente, o que o fazia parecer pequeno e solto na página.
+- **Hero:** o mascote repintado, uma vez só. Repeti-lo no topo e no rodapé
+  gastaria o efeito.
+- **Topo e rodapé:** assinatura tipográfica "DarioTech".
+- **Produtos:** a marca completa do Senhor Cardápio, sobre faixa creme — o único
+  lugar do site em que ela representa o produto, e não a empresa.
+- **Favicon:** `src/app/icon.png`, o mascote branco sobre cobalto.
 
-> **Pendência:** a DarioTech ainda não tem símbolo próprio — hoje a marca é só
-> tipográfica. Quando houver, ele entra no cabeçalho, no rodapé e no favicon
-> (`src/app/icon.png`, que hoje usa o mascote).
->
-> Dos arquivos da identidade, usamos a versão **RGB** e não a CMYK: JPEG em CMYK
+> Dos arquivos da identidade usamos a versão **RGB**, não a CMYK: JPEG em CMYK
 > não tem transparência e os navegadores renderizam suas cores de forma
-> inconsistente. A arte é a mesma. A versão "negativo" não serve para tela — é
-> uma silhueta chapada de uma cor só, para impressão monocromática.
+> inconsistente. A arte é a mesma.
 
 ## Deploy
 
